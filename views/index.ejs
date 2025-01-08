@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Todo List</title>
+        <link rel="stylesheet" href="/styles.css">
+    </head>
+    <body>
+        <div class="container">
+            <h1>Todo List</h1>
+
+            <form action="/add" method="POST">
+                <input type="text" name="title" placeholder="Enter a task" required>
+                <button type="submit">Add Task</button>
+            </form>
+
+            <ul>
+                <% tasks.forEach(function(task) { %>
+                    <li class="<%= task.completed ? 'completed' : '' %>">
+                      <form action="/toggle/<%= task.id %>" method="POST" style="display: inline;">
+                        <button type="submit">
+                          <%= task.completed ? 'Uncheck' : 'Check' %>
+                        </button>
+                      </form>
+                      <span><%= task.title %></span>
+                      <form action="/delete/<%= task.id %>" method="POST" style="display: inline;">
+                        <button type="submit">Delete</button>
+                      </form>
+                    </li>
+                  <% }) %>
+            </ul>
+        </div>
+    </body>
+</html>
